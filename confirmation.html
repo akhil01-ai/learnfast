@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WMQTHXLESW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WMQTHXLESW');
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LearnFast - Simple Registration</title>
+    <title>LearnFast - Course Registration</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -12,107 +21,151 @@
             font-family: 'Inter', sans-serif;
             background-color: #f7fafc; /* Light gray background */
         }
-        input:focus, select:focus {
+        /* Custom styles for focus states */
+        input:focus, select:focus, textarea:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.4);
-            border-color: #6366F1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.4); /* Tailwind's indigo-400 with opacity */
+            border-color: #6366F1; /* Tailwind's indigo-500 */
         }
     </style>
 </head>
 <body class="bg-gray-100 antialiased">
     <div class="min-h-screen flex flex-col">
-        <!-- Navigation Bar (simplified for consistency, link to Home only) -->
+        <!-- Navigation Bar (consistent with previous pages) -->
         <header class="bg-white shadow-sm p-4 md:p-6 rounded-b-xl">
             <nav class="container mx-auto flex justify-between items-center">
                 <a href="#" class="text-2xl font-bold text-indigo-700 rounded-lg p-2 hover:text-indigo-800 transition-colors">LearnFast</a>
                 <div class="flex space-x-4">
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 font-medium rounded-lg px-3 py-2 transition-colors">Home</a>
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 font-medium rounded-lg px-3 py-2 transition-colors">Courses</a>
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 font-medium rounded-lg px-3 py-2 transition-colors">About Us</a>
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 font-medium rounded-lg px-3 py-2 transition-colors">Contact</a>
                     <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors shadow-md">Sign Up</a>
                 </div>
             </nav>
         </header>
 
-        <!-- Simple Registration Form Section -->
-        <main class="flex-grow container mx-auto px-4 py-16 md:py-24 flex items-center justify-center">
-            <div class="max-w-md mx-auto bg-white p-8 md:p-10 rounded-xl shadow-2xl w-full">
-                <div class="text-center mb-8">
-                    <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3 rounded-lg">
-                        Join LearnFast
+        <!-- Registration Form Section -->
+        <main class="flex-grow container mx-auto px-4 py-16 md:py-24">
+            <div class="max-w-3xl mx-auto bg-white p-8 md:p-12 rounded-xl shadow-2xl">
+                <div class="text-center mb-10">
+                    <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 rounded-lg">
+                        Register for a Course
                     </h1>
-                    <p class="text-md text-gray-700 rounded-lg">
-                        Sign up in minutes to start your learning journey.
+                    <p class="text-md md:text-lg text-gray-700 rounded-lg">
+                        Fill out the form below to enroll in your chosen LearnFast course.
                     </p>
                 </div>
 
-                <form name="simpleRegistrationForm" onsubmit="handleSimpleRegistration(event)" class="space-y-5">
+                <!-- Added onsubmit event to redirect to the confirmation page -->
+                <form name="registrationForm" onsubmit="handleRegistration(event)" class="space-y-6">
+                    <!-- Personal Information -->
                     <div>
-                        <label for="full-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                        <input type="text" id="full-name" name="full-name" autocomplete="name" required
-                               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                               placeholder="John Doe">
-                    </div>
-                    <div>
-                        <label for="simple-email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                        <input type="email" id="simple-email" name="simple-email" autocomplete="email" required
-                               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                               placeholder="you@example.com">
-                    </div>
-                    <div>
-                        <label for="simple-password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                        <input type="password" id="simple-password" name="simple-password" autocomplete="new-password" required
-                               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                               placeholder="••••••••">
-                    </div>
-                    <div>
-                        <label for="preferred-course" class="block text-sm font-medium text-gray-700 mb-1">Preferred Course (Optional)</label>
-                        <select id="preferred-course" name="preferred-course"
-                                class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm">
-                            <option value="">-- Select --</option>
-                            <option value="web-dev">Web Development</option>
-                            <option value="data-sci">Data Science</option>
-                            <option value="cloud">Cloud Computing</option>
-                            <option value="other">Other</option>
-                        </select>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4 pb-2 border-b border-gray-200 rounded-lg">Personal Details</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="first-name" class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                                <input type="text" id="first-name" name="first-name" autocomplete="given-name" required
+                                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            </div>
+                            <div>
+                                <label for="last-name" class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                                <input type="text" id="last-name" name="last-name" autocomplete="family-name" required
+                                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                                <input type="email" id="email" name="email" autocomplete="email" required
+                                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number (Optional)</label>
+                                <input type="tel" id="phone" name="phone" autocomplete="tel"
+                                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="flex items-start pt-2">
-                        <div class="flex items-center h-5">
-                            <input id="simple-terms" name="simple-terms" type="checkbox" required
-                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                    <!-- Course Selection -->
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4 pb-2 border-b border-gray-200 rounded-lg">Course Selection</h2>
+                        <div>
+                            <label for="course" class="block text-sm font-medium text-gray-700 mb-1">Select Your Course</label>
+                            <select id="course" name="course" required
+                                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm">
+                                <option value="">-- Please Select a Course --</option>
+                                <option value="python">Python for Data Science</option>
+                                <option value="javascript">JavaScript & React Bootcamp</option>
+                                <option value="java">Advanced Java Development</option>
+                                <option value="csharp">C# and .NET Core</option>
+                                <option value="sql">SQL & Database Management</option>
+                                <option value="aws">Cloud Fundamentals with AWS</option>
+                                <option value="other">Other (Please specify in comments)</option>
+                            </select>
                         </div>
-                        <div class="ml-3 text-sm">
-                            <label for="simple-terms" class="font-medium text-gray-700">I agree to the <a href="#" class="text-indigo-600 hover:text-indigo-800">Terms</a>.</label>
+                    </div>
+
+                    <!-- Additional Information -->
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4 pb-2 border-b border-gray-200 rounded-lg">Additional Information</h2>
+                        <div>
+                            <label for="comments" class="block text-sm font-medium text-gray-700 mb-1">Comments/Questions (Optional)</label>
+                            <textarea id="comments" name="comments" rows="4"
+                                      class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Terms and Conditions & Submit Button -->
+                    <div class="pt-4 border-t border-gray-200">
+                        <div class="flex items-start">
+                            <div class="flex items-center h-5">
+                                <input id="terms" name="terms" type="checkbox" required
+                                       class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                            </div>
+                            <div class="ml-3 text-sm">
+                                <label for="terms" class="font-medium text-gray-700">I agree to the <a href="#" class="text-indigo-600 hover:text-indigo-800">Terms and Conditions</a> and <a href="#" class="text-indigo-600 hover:text-indigo-800">Privacy Policy</a>.</label>
+                            </div>
                         </div>
                     </div>
 
                     <div>
                         <button type="submit"
-                                class="thankyou.html"w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors transform hover:scale-105">
-                            Register Now
+                                class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors transform hover:scale-105">
+                            Complete Registration
                         </button>
                     </div>
                 </form>
             </div>
         </main>
 
-        <!-- Footer (simplified for consistency) -->
+        <!-- Footer (consistent with previous pages) -->
         <footer class="bg-gray-800 text-gray-300 py-8 mt-auto rounded-t-xl">
             <div class="container mx-auto px-4 text-center">
                 <p>&copy; 2025 LearnFast. All rights reserved.</p>
+                <div class="flex justify-center space-x-4 mt-4">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
             </div>
         </footer>
     </div>
 
     <script>
         /**
-         * Handles the simple registration form submission.
-         * Prevents default form submission and redirects to a generic thank you page.
+         * Handles the form submission for registration.
+         * Prevents default form submission and redirects to the confirmation page.
          * @param {Event} event - The form submission event.
          */
-        function handleSimpleRegistration(event) {
+        function handleRegistration(event) {
+            // Prevent the default form submission behavior (which would reload the page)
             event.preventDefault();
-            // In a real application, you would send this data to a server.
-            // For this demonstration, we just redirect.
-            window.location.href = 'learnfast-confirmation-page.html'; // Assuming you have this page
+
+            // Perform any client-side validation if needed before redirection
+            // For now, we'll assume HTML5 'required' attribute handles basic validation
+
+            // Redirect to the thank you/confirmation page
+            // Make sure the filename matches your thank you page HTML file
+            window.location.href = 'learnfast-confirmation-page.html';
         }
     </script>
 </body>
